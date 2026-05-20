@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "move-with-alias",
+	"name": "Move with alias",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
+	"description": "Move files to folders with aliases",
+	"author": "kemonprogrammer",
+	"authorUrl": "https://github.com/kemonprogrammer",
 	"fundingUrl": "https://obsidian.md/pricing",
 	"isDesktopOnly": false
 }
