@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "move-with-alias",
 	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "This obsidian plugins lets you move files or folders to folders using an alias",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {

@@ -2,7 +2,7 @@
  * Base generated with Gemini, adjusted manually
  */
 
-import { App, FuzzySuggestModal, TFile, TFolder, FuzzyMatch, renderResults, setIcon, normalizePath } from 'obsidian';
+import { App, FuzzySuggestModal, TFile, TFolder, FuzzyMatch, renderResults, setIcon, normalizePath, TAbstractFile } from 'obsidian';
 
 
 interface FolderWithAliases {
@@ -14,12 +14,12 @@ interface FolderWithAliases {
 
 
 export class MoveWithFolderAliasModal extends FuzzySuggestModal<FolderWithAliases> {
-	private fileToMove: TFile;
+	private fileToMove: TAbstractFile;
 
-	constructor(app: App, fileToMove: TFile) {
+	constructor(app: App, fileToMove: TAbstractFile, placeholder: string) {
 		super(app);
 		this.fileToMove = fileToMove;
-		this.setPlaceholder("Move file to folder or alias...");
+		this.setPlaceholder(placeholder);
 		this.setInstructions([
 			{ command: "↑↓", purpose: "to navigate" },
 			{ command: "↵ ", purpose: "to move" },

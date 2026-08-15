@@ -3,7 +3,7 @@
 	"name": "Move with alias",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Move files to folders with aliases",
+	"description": "Move files or folders to folders with aliases",
 	"author": "kemonprogrammer",
 	"authorUrl": "https://github.com/kemonprogrammer",
 	"fundingUrl": "https://obsidian.md/pricing",
