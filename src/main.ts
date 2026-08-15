@@ -1,42 +1,44 @@
-import { Plugin, TFolder } from 'obsidian';
+import { Plugin, TAbstractFile, TFile, TFolder, WorkspaceLeaf } from 'obsidian';
 import { MoveWithFolderAliasModal } from './modal'; // Assuming the modal code is in modal.ts
 
 export default class FolderAliasPlugin extends Plugin {
 	async onload() {
+
+		// override tab header and file explorer context menu item
 		this.registerEvent(
 			this.app.workspace.on('file-menu', (menu, file, source) => {
-				if (file instanceof TFolder) {
+				if (source !== 'tab-header' && source !== 'file-explorer-context-menu') return;
+
+				if (file instanceof TAbstractFile) {
+					const type = (file instanceof TFile) ? "file" : "folder"
 					menu.addItem((item) => {
 						item
-							.setTitle("Move folder to...")
-							.setIcon("folder-input")
+							.setTitle(`Move ${type} to...`)
+							.setIcon("folder-tree")
 							.onClick(() => {
 								new MoveWithFolderAliasModal(
 									this.app,
 									file,
-									"Move folder to..."
+									`Move ${type} to...`
 								).open();
 							});
 
+						// Defer DOM replacement until Obsidian builds the native menu
 						setTimeout(() => {
 							const menuEl = document.querySelector('.menu');
 							if (!menuEl) return;
-
 							const itemDom = (item as any).dom as HTMLElement
 
-							// Find all menu item titles
 							const items = Array.from(menuEl.querySelectorAll('.menu-item'));
 
-							// Find native "Move folder to..." item
+							// Locate native "Move file to..." item
 							const nativeItem = items.find(el => {
 								const title = el.querySelector('.menu-item-title')?.textContent;
-								return title === 'Move folder to...' && el !== itemDom;
+								return title === `Move ${type} to...` && el !== itemDom;
 							});
 
 							if (nativeItem) {
-								// Insert your modal launcher right before/after the native one
 								nativeItem.insertAdjacentElement('afterend', itemDom);
-								// Hide native one so yours replaces it visually
 								(nativeItem as HTMLElement).style.display = 'none';
 							}
 						}, 0);
@@ -44,9 +46,10 @@ export default class FolderAliasPlugin extends Plugin {
 				}
 			})
 		);
+
 		this.addCommand({
 			id: 'move-file-to-folder-alias',
-			name: 'Move file via folder note alias',
+			name: 'Move file to...',
 			// Simple check: Only run if there is an active file to move
 			checkCallback: (checking: boolean) => {
 				const activeFile = this.app.workspace.getActiveFile();
@@ -55,7 +58,7 @@ export default class FolderAliasPlugin extends Plugin {
 						new MoveWithFolderAliasModal(
 							this.app,
 							activeFile,
-							"Move file to folder or alias..."
+							"Move file to..."
 						).open();
 					}
 					return true;
