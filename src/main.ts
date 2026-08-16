@@ -1,4 +1,4 @@
-import { Plugin, TAbstractFile, TFile, TFolder, WorkspaceLeaf } from 'obsidian';
+import { Plugin, TAbstractFile, TFile } from 'obsidian';
 import { MoveWithFolderAliasModal } from './modal'; // Assuming the modal code is in modal.ts
 
 export default class FolderAliasPlugin extends Plugin {
@@ -24,7 +24,7 @@ export default class FolderAliasPlugin extends Plugin {
 							});
 
 						// Defer DOM replacement until Obsidian builds the native menu
-						setTimeout(() => {
+						window.setTimeout(() => {
 							const menuEl = document.querySelector('.menu');
 							if (!menuEl) return;
 							const itemDom = (item as any).dom as HTMLElement
@@ -38,11 +38,14 @@ export default class FolderAliasPlugin extends Plugin {
 							});
 
 							if (nativeItem) {
+								// Insert your modal launcher right before/after the native one
 								nativeItem.insertAdjacentElement('afterend', itemDom);
+								// Hide native one so yours replaces it visually
 								(nativeItem as HTMLElement).style.display = 'none';
 							}
 						}, 0);
 					});
+
 				}
 			})
 		);

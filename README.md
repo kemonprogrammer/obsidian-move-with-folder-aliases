@@ -1,4 +1,4 @@
-# Move with folder alias
+# Move with alias
 
 ### Introduction
 Have you ever created a folder to organize some notes, but couldn't decide between 2 names and just chose one randomly. Then later when you wanted to move a note to that folder you only remember the other name? This plugin offers a solution through folder alias (inspired by [note aliases](https://obsidian.md/help/aliases)). 

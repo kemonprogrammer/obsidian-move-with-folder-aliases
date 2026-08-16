@@ -155,9 +155,9 @@ export class MoveWithFolderAliasModal extends FuzzySuggestModal<FolderWithAliase
 	}
 
 	// 5. Item selection handler
-	async onChooseItem(item: FolderWithAliases, evt: MouseEvent | KeyboardEvent) {
+	onChooseItem(item: FolderWithAliases, evt: MouseEvent | KeyboardEvent) {
 		if (item.isCreateNew) {
-			await this.createFolderAndMove(item.searchString);
+			this.createFolderAndMove(item.searchString);
 			return;
 		}
 
@@ -168,7 +168,7 @@ export class MoveWithFolderAliasModal extends FuzzySuggestModal<FolderWithAliase
 			: `${item.folderPath}/${this.fileToMove.name}`;
 
 		try {
-			await this.app.vault.rename(this.fileToMove, newPath);
+			this.app.vault.rename(this.fileToMove, newPath);
 		} catch (error) {
 			console.error("Failed to move file:", error);
 		}

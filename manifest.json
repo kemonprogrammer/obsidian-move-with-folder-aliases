@@ -2,7 +2,7 @@
 	"id": "move-with-alias",
 	"name": "Move with alias",
 	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
+	"minAppVersion": "1.4.0",
 	"description": "Move files or folders to folders with aliases.",
 	"author": "kemonprogrammer",
 	"authorUrl": "https://github.com/kemonprogrammer",
